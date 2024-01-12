@@ -1,6 +1,6 @@
 const CONTACTS_KEY = 'contacts';
 
-function setContacts(contactsData) {
+function saveContacts(contactsData) {
   try {
     localStorage.setItem(CONTACTS_KEY, JSON.stringify(contactsData));
   } catch (error) {
@@ -16,4 +16,4 @@ function getContacts() {
     alert(`Oops... ${error.message}`);
   }
 }
-export { setContacts, getContacts };
+export { saveContacts, getContacts };
