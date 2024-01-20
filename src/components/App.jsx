@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import ContactForm from 'components/ContactForm';
 import ContactList from 'components/ContactList';
 import Filter from 'components/Filter';
@@ -8,28 +8,14 @@ import {
 } from 'localStorage/contactsLocalStorage.js';
 
 function App() {
-  const testContacts = [
-    { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-    { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-    { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-    { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-  ];
-  const [contacts, setContacts] = useState(testContacts);
+  const [contacts, setContacts] = useState(() => {
+    return getContacts();
+  });
+
   const [filter, setFilter] = useState('');
-  const isFirstRender = useRef(true);
 
   useEffect(() => {
-    const savedPersistContacts = getContacts();
-    if (savedPersistContacts.length !== 0) {
-      setContacts(savedPersistContacts);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!isFirstRender.current) {
-      saveContacts(contacts);
-    }
-    return () => (isFirstRender.current = false); //
+    saveContacts(contacts);
   }, [contacts]);
 
   const handleFilterChange = event => {
@@ -64,6 +50,7 @@ function App() {
   };
 
   const filteredContacts = getFilteredContacts();
+
   return (
     <div
       style={{

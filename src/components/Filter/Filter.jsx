@@ -12,7 +12,6 @@ function Filter({ filterValue, filterChange }) {
         className={filterInput}
         value={filterValue}
         onChange={filterChange}
-        autoFocus
       />
     </div>
   );

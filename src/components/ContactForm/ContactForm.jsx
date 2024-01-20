@@ -61,6 +61,7 @@ function ContactForm({ onSubmit }) {
               aria-label="Name"
               required
               onChange={handleChange}
+              autoFocus
             />
           </label>
         </div>
